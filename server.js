@@ -5,11 +5,9 @@ const { StreamChat } = require("stream-chat");
 const app = express();
 app.use(cors()); // HTML ko connect hone dega
 
-// ⚠️ APNI STREAM API KEY AUR SECRET YAHAN DAALNA
-const STREAM_API_KEY = "yf2hkwgqwzjw";
-const STREAM_API_SECRET = "9t65wujwcmrmesxy9d9jz8cphwvxymfk5e5dyy452p4fcpvwmtakzbf7ywf2mgze";
 
-const serverClient = StreamChat.getInstance(STREAM_API_KEY, STREAM_API_SECRET);
+
+const serverClient = StreamChat.getInstance(yf2hkwgqwzjw, t65wujwcmrmesxy9d9jz8cphwvxymfk5e5dyy452p4fcpvwmtakzbf7ywf2mgze);
 
 app.get("/get-token", (req, res) => {
     const uid = req.query.uid;
@@ -21,6 +19,23 @@ app.get("/get-token", (req, res) => {
     } catch (error) {
         res.status(500).json({ error: "Token fail ho gaya" });
     }
+});
+
+
+const express = require('express');
+const cors = require('cors'); // 1. ADD THIS
+const { StreamChat } = require('stream-chat');
+
+const app = express();
+
+// 2. ADD THIS LINE to allow your browser to connect without CORS errors
+app.use(cors({ origin: '*' })); 
+app.use(express.json());
+
+// ... your /get-token route goes here ...
+
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
 });
 
 app.listen(3000, () => {
